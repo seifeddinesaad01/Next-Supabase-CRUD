@@ -40,6 +40,7 @@ const Delete = () => {
         <div className="flex justify-between items-center pb-4 border-b border-dashed border-gray-900 mb-4">
           <h1 className="text-3xl font-semibold">Delete Post</h1>
         </div>
+       
         <form>
           <div className="my-12">
             Are you sure to delete <strong>{post?.name}</strong>?
