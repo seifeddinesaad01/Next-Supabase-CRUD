@@ -9,19 +9,19 @@ const Delete = () => {
   const router = useRouter();
   const { id } = useParams();
 
-  const [task, setTask] = useState<any>({
+  const [post, setPost] = useState<any>({
     title: "",
     description: "",
   });
 
   useEffect(() => {
-    const fetchTask = async () => {
+    const fetchPost = async () => {
       const { data } = await supabase.from("posts").select("*").eq("id", id);
-      setTask(data);
+      setPost(data);
     };
 
     if (id) {
-      fetchTask();
+      fetchPost();
     }
   }, [id]);
 
@@ -38,11 +38,11 @@ const Delete = () => {
     <>
       <div className="container mx-auto mt-8 max-w-[560px]">
         <div className="flex justify-between items-center pb-4 border-b border-dashed border-gray-900 mb-4">
-          <h1 className="text-3xl font-semibold">Delete Task</h1>
+          <h1 className="text-3xl font-semibold">Delete Post</h1>
         </div>
         <form>
           <div className="my-12">
-            Are you sure to delete <strong>{task?.name}</strong>?
+            Are you sure to delete <strong>{post?.name}</strong>?
           </div>
           <div className="flex w-full gap-2">
             <Link
@@ -62,7 +62,7 @@ const Delete = () => {
         </form>
       </div>
       <Head>
-        <title>Delete Task</title>
+        <title>Delete Post</title>
       </Head>
     </>
   );

@@ -5,26 +5,26 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [tasks, setTasks] = useState<any>([]);
+  const [posts, setPosts] = useState<any>([]);
 
-  const getTasks = async () => {
+  const getPosts = async () => {
     const { data, error } = await supabase.from('posts').select('*');
     if (error) {
       console.error('Error fetching data:', error.message);
     } else {
-      setTasks(data);
+      setPosts(data);
     }
   }
 
   useEffect(() => {
-    getTasks()
+    getPosts()
   }, [])
 
   return (
     <>
       <div className="container mx-auto mt-8 max-w-[560px]">
         <div className="flex justify-between items-center pb-4 border-b border-dashed border-gray-900 mb-4">
-          <h1 className="text-3xl font-semibold">Tasks</h1>
+          <h1 className="text-3xl font-semibold">Posts</h1>
           <Link
             className="bg-green-600 hover:bg-opacity-80 text-white rounded-lg px-4 py-2 duration-200"
             href="/create"
@@ -33,7 +33,7 @@ export default function Home() {
           </Link>
         </div>
         <ul>
-          {tasks.map((task:any) => (
+          {posts.map((task:any) => (
             <li key={task.id} className="py-2 flex justify-between w-full">
               <span>
                 <strong>{task.title}</strong> - {task.description}
@@ -44,7 +44,7 @@ export default function Home() {
               </span>
             </li>
           ))}
-          {tasks?.length < 1 && <div className="py-2">No data</div>}
+          {posts?.length < 1 && <div className="py-2">No data</div>}
         </ul>
       </div>
       <Head>

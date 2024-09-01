@@ -14,19 +14,18 @@ const Edit = () => {
   const router = useRouter();
 
   const { id } = useParams();
-  console.log(id,"id")
 
-  const [task, setTask] = useState<Task>({
+  const [post, setPost] = useState<Task>({
     title: "",
     description: "",
   });
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTask({ ...task, [e.target.name]: e.target.value });
+    setPost({ ...post, [e.target.name]: e.target.value });
   };
 
   useEffect(() => {
-    const fetchTask = async () => {
+    const fetchPost = async () => {
       if (typeof id === "string") {
         const { data, error } = await supabase
           .from("posts")
@@ -40,21 +39,20 @@ const Edit = () => {
         }
 
         if (data) {
-          setTask(data);
-          console.log(data,"data")
+          setPost(data);
         }
       }
     };
 
     if (id) {
-      fetchTask();
+      fetchPost();
     }
   }, [id]);
 
   const handleUpdate = async () => {
     try {
       if (typeof id === "string") {
-        const { error } = await supabase.from("posts").update(task).eq("id", id);
+        const { error } = await supabase.from("posts").update(post).eq("id", id);
 
         if (error) {
           console.error("Error updating task:", error.message);
@@ -72,7 +70,7 @@ const Edit = () => {
     <>
       <div className="container mx-auto mt-8 max-w-[560px]">
         <div className="flex justify-between items-center pb-4 border-b border-dashed border-gray-900 mb-4">
-          <h1 className="text-3xl font-semibold">Edit Task</h1>
+          <h1 className="text-3xl font-semibold">Edit Post</h1>
         </div>
         <form>
           <div className="mb-4">
@@ -82,7 +80,7 @@ const Edit = () => {
               type="text"
               id="title"
               name="title"
-              value={task.title}
+              value={post.title}
               onChange={onChange}
             />
           </div>
@@ -93,7 +91,7 @@ const Edit = () => {
               type="text"
               id="description"
               name="description"
-              value={task.description}
+              value={post.description}
               onChange={onChange}
             />
           </div>
@@ -102,12 +100,12 @@ const Edit = () => {
             type="button"
             onClick={handleUpdate}
           >
-            Edit Task
+            Edit Post
           </button>
         </form>
       </div>
       <Head>
-        <title>Edit Task</title>
+        <title>Edit Post</title>
       </Head>
     </>
   );
