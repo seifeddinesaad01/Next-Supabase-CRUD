@@ -39,8 +39,8 @@ export default function Home() {
                 <strong>{task.title}</strong> - {task.description}
               </span>
               <span className="flex gap-2">
-                <Link className="text-blue-700 underline hover:no-underline" href={`/${task.id}/edit`}>Edit</Link>
-                <Link className="text-red-500 underline hover:no-underline" href={`/${task.id}/delete`}>Delete</Link>
+                <Link className="text-blue-700 underline hover:no-underline" href={`/edit/${task.id}`}>Edit</Link>
+                <Link className="text-red-500 underline hover:no-underline" href={`/delete/${task.id}`}>Delete</Link>
               </span>
             </li>
           ))}
